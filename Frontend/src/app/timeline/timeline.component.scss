@@ -1,0 +1,27 @@
+.payments-row {
+    display: flex;
+    gap: 2em;
+
+    &>* {
+        flex-grow: 1;
+    }
+}
+
+.transactions {
+    flex: 1 1 70%;
+}
+
+.date-container {
+    flex: 1 1 30%;
+    border-right: 2px solid red;
+}
+
+@media screen and (max-width:600px) {
+    .payments-row {
+        flex-wrap: wrap;
+    }
+
+    .date-container {
+        border-right: 0;
+    }
+}

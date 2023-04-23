@@ -1,1 +1,13 @@
-in
+<mat-toolbar color="primary">
+    <span>Payments Timeline</span>
+    <a routerLink="/timeline" *ngIf="router.url === '/detail'">
+        <mat-icon>arrow_back</mat-icon>Back</a>
+    <button mat-flat-button routerLinkActive="accent" [routerLink]="['/detail']" *ngIf="router.url === '/detail'">
+        <mat-icon>arrow_back</mat-icon>
+        Back
+    </button>
+</mat-toolbar>
+
+<main class="main-content">
+    <router-outlet></router-outlet>
+</main>

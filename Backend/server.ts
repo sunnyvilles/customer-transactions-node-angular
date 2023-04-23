@@ -1,9 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const cors = require('cors');
 
 app.use(bodyParser.json()); // support json encoded bodies
-app.use(bodyParser.urlencoded({extended: false})); // support encoded bodies
+app.use(bodyParser.urlencoded({ extended: false })); // support encoded bodies
+
+//remove cross origin errors
+app.use(cors());
+
+const transactionData = require('./transactions.json');
 
 app.get('/', (req: any, res: any) => {
   console.log(req.body);
@@ -12,7 +18,13 @@ app.get('/', (req: any, res: any) => {
 });
 
 app.get('/api/transactions', (req: any, res: any) => {
-  res.send(require('./transactions.json'));
+  res.send(transactionData);
+});
+
+app.get('/api/transactions/:id', (req: any, res: any) => {
+  const filteredTransactions = transactionData.days.filter((dayTransaction: any) => dayTransaction.id === req.params.id);
+  const result = filteredTransactions[0].transactions;
+  res.send(result);
 });
 
 app.listen(8080, () => {
