@@ -1,15 +1,17 @@
-<mat-card>
-    <mat-card-content>
-        <div class="payments-row">
-            <div class="date-container">
-                its a date
+<div *ngFor="let dayRecords of transactionsList | keyvalue: keyValueMapSort ; let i = index">
+    <mat-card>
+        <mat-card-content>
+            <div class="payments-row">
+                <div class="date-container">
+                    <span>{{dayRecords.key | date:'short'}}</span>
+                </div>
+                <div class="transactions">
+                    <div *ngIf="dayRecords.value.length > 0">
+                        <app-transactions [dayRecords]="dayRecords.value" [showHeader]="i===0"></app-transactions>
+                    </div>
+                </div>
             </div>
-            <div class="transactions">
-                <div>first</div>
-                <div>first</div>
-                <div>first</div>
-                <div>first</div>
-            </div>
-        </div>
-    </mat-card-content>
-</mat-card>
+        </mat-card-content>
+    </mat-card>
+    <br />
+</div>

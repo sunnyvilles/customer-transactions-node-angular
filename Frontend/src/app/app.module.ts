@@ -14,6 +14,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
+
+import { SortService } from './services/sort.service';
 
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
@@ -32,10 +35,12 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    MatTableModule,
+
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [SortService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

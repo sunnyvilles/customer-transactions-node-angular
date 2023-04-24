@@ -21,11 +21,15 @@ app.get('/api/transactions', (req: any, res: any) => {
   res.send(transactionData);
 });
 
+
+// get transactions by date 
 app.get('/api/transactions/:id', (req: any, res: any) => {
   const filteredTransactions = transactionData.days.filter((dayTransaction: any) => dayTransaction.id === req.params.id);
   const result = filteredTransactions[0].transactions;
   res.send(result);
 });
+
+//todo: get transactions by date-range
 
 app.listen(8080, () => {
   console.log('Express app listening on port 8080!');
