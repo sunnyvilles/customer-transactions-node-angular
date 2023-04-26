@@ -23,10 +23,10 @@ app.get('/api/transactions', (req: any, res: any) => {
 
 
 // get transactions by date 
-app.get('/api/transactions/:id', (req: any, res: any) => {
-  const filteredTransactions = transactionData.days.filter((dayTransaction: any) => dayTransaction.id === req.params.id);
-  const result = filteredTransactions[0].transactions;
-  res.send(result);
+app.get('/api/transactions/:datekey/:id', (req: any, res: any) => {
+  const filteredTransactions = transactionData.days.filter((dayTransaction: any) => dayTransaction.id === req.params.datekey);
+  const result = filteredTransactions[0].transactions.filter((transaction: any) => transaction.id === parseInt(req.params.id));
+  res.send(result[0]);
 });
 
 //todo: get transactions by date-range

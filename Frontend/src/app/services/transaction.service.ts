@@ -19,6 +19,11 @@ export class TransactionService {
       , retry(1), catchError(this.onError));
   }
 
+  getTransactionById(datekey: string, id: number): Observable<Transaction> {
+    return this.http.get<Transaction>(`${this.baseUrl}api/transactions/${datekey}/${id}`).pipe(
+      retry(1), catchError(this.onError));
+  }
+
   onError(err: any): Observable<any> {
     const message = 'error while getting list of transactions: ' + err.status;
     return throwError(() => message);

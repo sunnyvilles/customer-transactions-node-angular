@@ -6,8 +6,7 @@ import { DetailComponent } from './detail/detail.component';
 const routes: Routes = [
   { path: '', redirectTo: '/timeline', pathMatch: 'full' },
   { path: 'timeline', component: TimelineComponent },
-  { path: 'detail/:id', component: DetailComponent },
-  { path: '**', redirectTo: '/timeline' },
+  { path: 'detail/:datekey/:id', component: DetailComponent },
 ];
 
 @NgModule({

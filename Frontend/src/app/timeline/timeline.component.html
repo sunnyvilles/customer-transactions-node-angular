@@ -3,11 +3,12 @@
         <mat-card-content>
             <div class="payments-row">
                 <div class="date-container">
-                    <span>{{dayRecords.key | date:'short'}}</span>
+                    <span>{{dayRecords.key | date:'EEEE, MMMM d, y'}}</span>
                 </div>
                 <div class="transactions">
                     <div *ngIf="dayRecords.value.length > 0">
-                        <app-transactions [dayRecords]="dayRecords.value" [showHeader]="i===0"></app-transactions>
+                        <app-transactions [dayRecords]="dayRecords.value" [showHeader]="i===0"
+                            [datekey]="dayRecords.key"></app-transactions>
                     </div>
                 </div>
             </div>

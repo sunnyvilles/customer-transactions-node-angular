@@ -1,5 +1,3 @@
-
-
 export interface Transaction {
     id: number,
     timestamp: Date,
@@ -8,7 +6,6 @@ export interface Transaction {
     description: string,
     otherParty?: OtherParty
 }
-
 
 export interface TransactionsByDay {
     id: string,
@@ -24,4 +21,4 @@ type OtherParty = {
     iban: string
 }
 
-export type TransactionList = Map<number, Transaction[]>;
+export type TransactionList = Map<string, Transaction[]>;
