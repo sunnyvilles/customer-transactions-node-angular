@@ -1,6 +1,6 @@
 {
     "/": {
-        "target": "http://localhost:8080",
+        "target": "https://transactions-service.onrender.com",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": false

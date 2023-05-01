@@ -10,7 +10,7 @@ import { SortService } from './sort.service';
 })
 
 export class TransactionService {
-  private baseUrl = 'http://localhost:8080/';
+  private baseUrl = 'https://transactions-service.onrender.com/';
   constructor(private http: HttpClient, private sortService: SortService) { }
 
   getTransactions(): Observable<TransactionsByDay[]> {
