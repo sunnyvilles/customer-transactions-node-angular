@@ -3,6 +3,9 @@ Backend/dist
 
 Frontend/node_modules
 Frontend/dist
+Frontend/.vscode/*
+Frontend/.angular
 
 .DS_store
-.history
+Thumbs.db
+.history/*

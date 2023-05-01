@@ -1,10 +1,8 @@
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Transaction, TransactionsByDay } from '../models/transaction';
+import { Transaction } from '../models/transaction';
 import { SortService } from '../services/sort.service';
 import { Router } from '@angular/router';
-import { CurrencyService } from '../services/currency-service.service';
-import { Currency } from '../models/currency';
 
 @Component({
   selector: 'app-transactions',
@@ -13,22 +11,21 @@ import { Currency } from '../models/currency';
 })
 export class TransactionsComponent implements OnInit {
   @Input() dayRecords: Transaction[] = [];
-  @Input() showHeader: boolean = false;
+  @Input() showHeader = false;
   @Input() datekey: string | undefined;
 
   loading: boolean | undefined;
 
-  columnList: string[] = ['partyName', 'amount'];
-  dataSource: MatTableDataSource<Transaction> = new MatTableDataSource<Transaction>([]);;
+  columnList = ['partyName', 'amount'];
+  dataSource: MatTableDataSource<Transaction> = new MatTableDataSource<Transaction>([]);
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource<Transaction>(this.orderByDate(this.dayRecords));
   }
 
-  constructor(private sortService: SortService, private router: Router, private currencyService: CurrencyService) { }
+  constructor(private sortService: SortService, private router: Router) { }
 
   onTransactionClick(transactionData: Transaction): void {
-    let data = JSON.stringify(transactionData);
     this.router.navigate(["/detail/", this.datekey, transactionData.id]);
   }
 
@@ -36,8 +33,8 @@ export class TransactionsComponent implements OnInit {
     return data.sort((t1, t2) => this.sortService.sortByDate(t1.timestamp, t2.timestamp))
   }
 
-  getCurrencyInEur(value: number, currencyCode: string): number {
-    return this.currencyService.getCurrencyInEur(value, currencyCode);
+  getCurrencyInEur(value = 0, currencyRate = 1): number {
+    return value * currencyRate;
   }
 
 }

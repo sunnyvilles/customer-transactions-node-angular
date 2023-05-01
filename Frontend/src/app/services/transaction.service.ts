@@ -16,16 +16,16 @@ export class TransactionService {
   getTransactions(): Observable<TransactionsByDay[]> {
     return this.http.get<AllTransactions>(`${this.baseUrl}api/transactions`).pipe(
       map((allTransactions: AllTransactions) => allTransactions.days.sort((a, b) => this.sortService.sortByDate(new Date(a.id), new Date(b.id))))
-      , retry(1), catchError(this.onError));
+      , retry(2), catchError(this.onError));
   }
 
   getTransactionById(datekey: string, id: number): Observable<Transaction> {
     return this.http.get<Transaction>(`${this.baseUrl}api/transactions/${datekey}/${id}`).pipe(
-      retry(1), catchError(this.onError));
+      retry(2), catchError(this.onError));
   }
 
   onError(err: any): Observable<any> {
-    const message = 'error while getting list of transactions: ' + err.status;
+    const message = 'error while getting the transactions data: ' + err.status;
     return throwError(() => message);
   }
 

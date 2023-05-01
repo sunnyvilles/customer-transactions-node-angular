@@ -9,7 +9,12 @@
     <!-- Symbol Column -->
     <ng-container matColumnDef="amount">
         <th mat-header-cell *matHeaderCellDef [hidden]="!showHeader"> Amount </th>
-        <td mat-cell *matCellDef="let row"> {{getCurrencyInEur(row.amount,row.currencyCode) | currency:'EUR'}} </td>
+        <td mat-cell *matCellDef="let row">
+            <span [ngClass]="row.amount > 0 ?'amount-positive':'amount-negative'">
+                {{ (row?.currencyCode === 'EUR'? row.amount: getCurrencyInEur(row.amount,row.currencyRate)) |
+                currency:'EUR' : 'symbol': '1.0-2' }}
+            </span>
+        </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columnList" [hidden]="!showHeader"></tr>

@@ -1,3 +1,15 @@
 .mat-divider {
     margin: 1em 0px;
 }
+
+.details-list-item {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width:600px) {
+
+    .details-list-item {
+        justify-content: flex-start;
+    }
+}

@@ -1,0 +1,8 @@
+:root {
+    --color-positive: green;
+    --color-negative: red;
+}
+
+@function amount($nature) {
+    @return var(--color-#{$nature});
+}

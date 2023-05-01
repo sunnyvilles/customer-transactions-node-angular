@@ -3,7 +3,8 @@ export interface Transaction {
     timestamp: Date,
     amount: number,
     currencyCode: string,
-    description: string,
+    currencyRate?: number,
+    description?: string,
     otherParty?: OtherParty
 }
 

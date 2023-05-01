@@ -1,5 +1,7 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
+import { DATE_PIPE_DEFAULT_OPTIONS } from '@angular/common';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,10 +18,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { SortService } from './services/sort.service';
-
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,6 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     MatToolbarModule,
@@ -38,10 +40,17 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
     MatButtonModule,
     MatCardModule,
     MatTableModule,
-    MatDividerModule
+    MatDividerModule,
+    MatListModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule,
+    AppRoutingModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [SortService],
+  providers: [
+    SortService,
+    { provide: DATE_PIPE_DEFAULT_OPTIONS, useValue: { dateFormat: 'shortDate' } }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

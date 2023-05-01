@@ -1,4 +1,8 @@
-<div *ngFor="let dayRecords of transactionsList | keyvalue: keyValueMapSort ; let i = index">
+<h1>Transactions Timeline</h1>
+
+<mat-spinner *ngIf="loading"></mat-spinner>
+
+<div *ngFor="let dayRecords of transactionsList | keyvalue: recordsMapSortOrder ; let i = index">
     <mat-card>
         <mat-card-content>
             <div class="payments-row">

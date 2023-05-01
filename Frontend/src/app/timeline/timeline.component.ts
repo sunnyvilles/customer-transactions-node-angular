@@ -1,25 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { TransactionService } from '../services/transaction.service';
 import { Transaction, TransactionsByDay, TransactionList } from '../models/transaction';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-timeline',
   templateUrl: './timeline.component.html',
   styleUrls: ['./timeline.component.scss']
 })
-export class TimelineComponent implements OnInit {
-  loading: boolean | undefined;
+export class TimelineComponent implements OnInit, OnDestroy {
+  loading = true;
   transactionSubscription: Subscription | undefined;
   transactionsList: TransactionList = new Map<string, Transaction[]>();
-  keyValueMapSort() { return 0 };
+  recordsMapSortOrder() { return 0 }
 
-  constructor(private transactionService: TransactionService) { }
+  constructor(private transactionService: TransactionService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.transactionSubscription = this.transactionService.getTransactions().subscribe(data => {
-      this.transactionsList = this.structureData(data);
+    this.transactionSubscription = this.transactionService.getTransactions().subscribe({
+      next: data => {
+        this.transactionsList = this.structureData(data);
+      },
+      error: err => this.handleError(err),
+      complete: () => this.loading = false
     });
   }
 
@@ -33,4 +38,10 @@ export class TimelineComponent implements OnInit {
     return dataMap;
   }
 
+  handleError(message: string) {
+    this.loading = false;
+    this.snackBar.open(message, '', {
+      duration: 4000,
+    });
+  }
 }
